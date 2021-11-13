@@ -22,8 +22,8 @@ app.get('/calculations', (req, res) => {
     res.send(calculations);
 });
 
-app.post('/calculations', (req, res) => {
-    console.log('in POST /calculations');
+app.post('/additions', (req, res) => {
+    console.log('in POST /additions');
     console.log('req.body', req.body);
     req.body.sum = Number(req.body.firstInputValue) + Number(req.body.secondInputValue);    console.log(req.body);
     calculations.push(req.body);

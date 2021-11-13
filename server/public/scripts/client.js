@@ -3,9 +3,15 @@ $(document).ready(onReady);
 function onReady() {
     console.log('in jQuery');
     $('#plus-btn').on('click', handlePlusClick);
-    $('#equal-btn').on('click', submitCalculation );
+    $('#equal-btn').on('click', submitAddition);
+    $('#clear-btn').on('click', handleClearButton);
     renderCalculation();
     // renderTotal();
+}
+function handleClearButton() {
+    console.log('in the clear');
+    $('#first-input').val('')
+    $('#second-input').val('')
 }
 
 function handlePlusClick() {
@@ -13,16 +19,16 @@ function handlePlusClick() {
     
 }
 
-function submitCalculation() {
-    const calculationObject = {
+function submitAddition() {
+    const additionObject = {
         firstInputValue: $('#first-input').val(),
         secondInputValue: $('#second-input').val(),
     };
 
     $.ajax({
         method: 'POST',
-        url: '/calculations',
-        data: calculationObject
+        url: '/additions',
+        data: additionObject
     }).then((response) => {
         console.log('inside POST request');
         renderCalculation();
@@ -52,7 +58,6 @@ function renderCalculation() {
         url: '/calculations'
     }).then((response) => {
         console.log('response', response);
-        // renderTotal();
         $('#calculation-list').empty();
         for (let calculation of response) {
             $('#calculation-list').append(`
@@ -60,7 +65,7 @@ function renderCalculation() {
             `)
             $('#current-total').empty();
             $('#current-total').append(`
-            <li>${calculation.sum}</li>
+            ${calculation.sum}
             `)
         }
         }).catch((error) => {
