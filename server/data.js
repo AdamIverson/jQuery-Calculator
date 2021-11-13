@@ -1,4 +1,8 @@
-// which data goes here?
-// it's probably an array of objects
+// const   calculationHistory = [];
 
-module.exports = 
+
+
+// // which data goes here?
+// // it's probably an array of objects
+
+// module.exports = calculationHistory;
