@@ -12,14 +12,16 @@ app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
 app.get('/calculations', (req, res) => {
-    console.log('in GET /calculations ');
+    console.log('in GET /calculations');
     res.send(calculations);
 });
 
 app.post('/calculations', (req, res) => {
     console.log('in POST /calculations');
     console.log('req.body', req.body);
-    calculations.push(req.body.calculationObject);
+    console.log(req.body);
+
+    calculations.push(req.body);
     res.sendStatus(200);
 });
 
@@ -34,7 +36,10 @@ app.post('/calculations', (req, res) => {
 //     numberGuesses.push(req.body);
 //     res.sendStatus(201);
 // });
-
+function addNumbers(num1, num2) {
+    let addSum = num1 + num2;
+    return addSum;
+}
 
 app.listen(PORT, () => {
     console.log ('Server is running on port', PORT)
