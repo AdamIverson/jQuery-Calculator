@@ -5,7 +5,7 @@ function onReady() {
     $('.plus-btn').on('click', handlePlusClick);
     $('.minus-btn').on('click', handleMinusClick);
     $('.multiply-btn').on('click', handleMultiplyClick);
-    $('.divide-btn').on('click', handleDivideClick);
+    // $('.divide-btn').on('click', handleDivideClick);
     $('#equal-btn').on('click', handleEqualButton);
     $('#clear-btn').on('click', handleClearButton);
     renderCalculation();
@@ -19,19 +19,33 @@ function handleEqualButton() {
         submitAddition();
     } else if($('#equal-btn').hasClass('minus-btn')){
         submitSubtraction();
-    } else if($('#equal-btn').hasClass('divide-btn')){
+    } else if($('#equal-btn').hasClass('multiply-btn')){
         submitMultiply();
     }
 }
 
 function handlePlusClick() {
     console.log('in plus click');
-    $('#equal-btn').toggleClass('plus-btn')
+    $('#equal-btn').addClass('plus-btn');
+    $('#equal-btn').removeClass('minus-btn');
+    $('#equal-btn').removeClass('multiply-btn');
+    $('#equal-btn').removeClass('divide-btn')
 }
 
 function handleMinusClick() {
     console.log('in minus click');
-    $('#equal-btn').toggleClass('minus-btn')
+    $('#equal-btn').addClass('minus-btn');
+    $('#equal-btn').removeClass('plus-btn');
+    $('#equal-btn').removeClass('multiply-btn');
+    $('#equal-btn').removeClass('divide-btn')
+}
+
+function handleMultiplyClick() {
+    console.log('in multiply click');
+    $('#equal-btn').addClass('multiply-btn');
+    $('#equal-btn').removeClass('minus-btn');
+    $('#equal-btn').removeClass('plus-btn');
+    $('#equal-btn').removeClass('divide-btn')
 }
 
 function submitAddition() {
@@ -70,6 +84,23 @@ function submitSubtraction() {
     })
 }
 
+function submitMultiply() {
+    const multiplicationObject = {
+        firstInputValue: $('#first-input').val(),
+        secondInputValue: $('#second-input').val(),
+    };
+
+    $.ajax({
+        method: 'POST',
+        url: '/multiplications',
+        data: multiplicationObject
+    }).then((response) => {
+        console.log('inside POST request');
+        renderCalculation();
+    }).catch((error) => {
+        console.log('dang, it did not work');
+    })
+}
 function renderCalculation() {
     $.ajax({
         method: 'GET',
