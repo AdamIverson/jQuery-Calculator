@@ -4,7 +4,7 @@ function onReady() {
     console.log('in jQuery');
     $('#plus-btn').on('click', handlePlusClick);
     $('#equal-btn').on('click', handleEqualClick);
-    renderCalculation();
+    // renderCalculation();
 }
 
 function handleEqualClick() {
