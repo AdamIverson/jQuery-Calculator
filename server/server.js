@@ -20,7 +20,9 @@ app.post('/calculations', (req, res) => {
     console.log('in POST /calculations');
     console.log('req.body', req.body);
     console.log(req.body);
-
+    total = Number(req.body.firstInputValue) + Number(req.body.secondInputValue);
+    req.body.sum = total;
+    console.log(req.body);
     calculations.push(req.body);
     res.sendStatus(200);
 });
@@ -36,10 +38,11 @@ app.post('/calculations', (req, res) => {
 //     numberGuesses.push(req.body);
 //     res.sendStatus(201);
 // });
-function addNumbers(num1, num2) {
-    let addSum = num1 + num2;
-    return addSum;
-}
+
+// function addNumbers() {
+//     let addSum = req.body[0] + req.body[1];
+//     return addSum;
+// }
 
 app.listen(PORT, () => {
     console.log ('Server is running on port', PORT)
