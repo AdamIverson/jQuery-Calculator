@@ -5,11 +5,12 @@ function onReady() {
     $('#plus-btn').on('click', handlePlusClick);
     $('#equal-btn').on('click', submitCalculation );
     renderCalculation();
+    // renderTotal();
 }
 
 function handlePlusClick() {
     console.log('in plus click');
-    //toggle?
+    
 }
 
 function submitCalculation() {
@@ -30,23 +31,20 @@ function submitCalculation() {
     })
 }
 
-// function renderNumber() {
+// function renderTotal() {
 //     $.ajax({
 //         method: 'GET',
-//         url: '/'
+//         url: '/total'
 //             }).then((response) => {
 //             console.log('response', response);
-//             $('#').empty();
-        
-//             for (let  of response) {
-//                 $('#').append(`
-//                 `)
-//             }
+//             $('#current-total').empty();
+//             $('#current-total').append(`
+//             <li>${response}</li>
+//             `)
 //             }).catch((error) => {
 //             console.log('error', error);
 //             });
 //         }
-// }
 
 function renderCalculation() {
     $.ajax({
@@ -54,10 +52,15 @@ function renderCalculation() {
         url: '/calculations'
     }).then((response) => {
         console.log('response', response);
+        // renderTotal();
         $('#calculation-list').empty();
         for (let calculation of response) {
             $('#calculation-list').append(`
             <li>${calculation.firstInputValue} + ${calculation.secondInputValue} = ${calculation.sum}</li>
+            `)
+            $('#current-total').empty();
+            $('#current-total').append(`
+            <li>${calculation.sum}</li>
             `)
         }
         }).catch((error) => {

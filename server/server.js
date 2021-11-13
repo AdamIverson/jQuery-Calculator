@@ -1,4 +1,5 @@
-const   calculations = [];
+const calculations = [];
+// calculations.sum = Number(calculations.firstInputValue) + Number(calculations.secondInputValue);
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -11,6 +12,11 @@ app.use(express.static('./server/public'));
 app.use(express.json());
 app.use(express.urlencoded({extended:true}))
 
+app.get('/total', (req, res) => {
+        console.log('in GET /total');
+        res.send(calculations.sum);
+    });
+
 app.get('/calculations', (req, res) => {
     console.log('in GET /calculations');
     res.send(calculations);
@@ -19,10 +25,7 @@ app.get('/calculations', (req, res) => {
 app.post('/calculations', (req, res) => {
     console.log('in POST /calculations');
     console.log('req.body', req.body);
-    console.log(req.body);
-    total = Number(req.body.firstInputValue) + Number(req.body.secondInputValue);
-    req.body.sum = total;
-    console.log(req.body);
+    req.body.sum = Number(req.body.firstInputValue) + Number(req.body.secondInputValue);    console.log(req.body);
     calculations.push(req.body);
     res.sendStatus(200);
 });
