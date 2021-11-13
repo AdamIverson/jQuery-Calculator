@@ -1,5 +1,5 @@
 {
-  "name": "weekend-jquery-server-calculator-x",
+  "name": "weekend-jquery-server-calculator",
   "version": "1.0.0",
   "description": "[Project Instructions](./INSTRUCTIONS.md), this line may be removed once you have updated the README.md",
   "main": "index.js",
@@ -8,13 +8,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AdamIverson/weekend-jquery-server-calculator-X.git"
+    "url": "git+https://github.com/PrimeAcademy/weekend-jquery-server-calculator.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AdamIverson/weekend-jquery-server-calculator-X/issues"
+    "url": "https://github.com/PrimeAcademy/weekend-jquery-server-calculator/issues"
   },
-  "homepage": "https://github.com/AdamIverson/weekend-jquery-server-calculator-X#readme"
+  "homepage": "https://github.com/PrimeAcademy/weekend-jquery-server-calculator#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
