@@ -2,21 +2,36 @@ $(document).ready(onReady);
 
 function onReady() {
     console.log('in jQuery');
-    $('#plus-btn').on('click', handlePlusClick);
-    $('#equal-btn').on('click', submitAddition);
+    $('.plus-btn').on('click', handlePlusClick);
+    $('.minus-btn').on('click', handleMinusClick);
+    $('.multiply-btn').on('click', handleMultiplyClick);
+    $('.divide-btn').on('click', handleDivideClick);
+    $('#equal-btn').on('click', handleEqualButton);
     $('#clear-btn').on('click', handleClearButton);
     renderCalculation();
     // renderTotal();
 }
-function handleClearButton() {
-    console.log('in the clear');
-    $('#first-input').val('')
-    $('#second-input').val('')
+
+function handleEqualButton() {
+    console.log('click');
+    
+    if($('#equal-btn').hasClass('plus-btn')){
+        submitAddition();
+    } else if($('#equal-btn').hasClass('minus-btn')){
+        submitSubtraction();
+    } else if($('#equal-btn').hasClass('divide-btn')){
+        submitMultiply();
+    }
 }
 
 function handlePlusClick() {
     console.log('in plus click');
-    
+    $('#equal-btn').toggleClass('plus-btn')
+}
+
+function handleMinusClick() {
+    console.log('in minus click');
+    $('#equal-btn').toggleClass('minus-btn')
 }
 
 function submitAddition() {
@@ -37,20 +52,23 @@ function submitAddition() {
     })
 }
 
-// function renderTotal() {
-//     $.ajax({
-//         method: 'GET',
-//         url: '/total'
-//             }).then((response) => {
-//             console.log('response', response);
-//             $('#current-total').empty();
-//             $('#current-total').append(`
-//             <li>${response}</li>
-//             `)
-//             }).catch((error) => {
-//             console.log('error', error);
-//             });
-//         }
+function submitSubtraction() {
+    const subtractionObject = {
+        firstInputValue: $('#first-input').val(),
+        secondInputValue: $('#second-input').val(),
+    };
+
+    $.ajax({
+        method: 'POST',
+        url: '/subtractions',
+        data: subtractionObject
+    }).then((response) => {
+        console.log('inside POST request');
+        renderCalculation();
+    }).catch((error) => {
+        console.log('dang, it did not work');
+    })
+}
 
 function renderCalculation() {
     $.ajax({
@@ -73,6 +91,11 @@ function renderCalculation() {
         })
     }
 
+function handleClearButton() {
+    console.log('in the clear');
+    $('#first-input').val('')
+    $('#second-input').val('')
+}
 // function renderCalculation() {
 //     $.ajax({
 //       method: 'GET',
