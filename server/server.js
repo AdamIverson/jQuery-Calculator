@@ -42,13 +42,20 @@ app.post('/subtractions', (req, res) => {
     // res.sendStatus(200);
 });
 
-// app.post('/multiplications', (req, res) => {
-//     console.log('in POST /multiplications');
-//     console.log('req.body', req.body);
-//     req.body.sum = Number(req.body.firstInputValue) * Number(req.body.secondInputValue);    console.log(req.body);
-//     calculations.push(req.body);
-//     res.sendStatus(200);
-// });
+app.get('/multiply', (req, res) => {
+    console.log('in GET /multiply');
+    res.send(calculations);
+});
+
+app.post('/multiply', (req, res) => {
+    console.log('in POST /multiply');
+    console.log('req.body', req.body);
+    req.body.sum = Number(req.body.firstInputValue) * Number(req.body.secondInputValue);    console.log(req.body);
+    calculations.push(req.body);
+    res.send(calculations);
+    // res.sendStatus(200);
+});
+
 // app.get('/', (req, res) => {
 //     console.log('in GET /');
 //     res.send();

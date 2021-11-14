@@ -4,7 +4,7 @@ function onReady() {
     console.log('in jQuery');
     $('.plus-btn').on('click', handlePlusClick);
     $('.minus-btn').on('click', handleMinusClick);
-    // $('.multiply-btn').on('click', handleMultiplyClick);
+    $('.multiply-btn').on('click', handleMultiplyClick);
     // $('.divide-btn').on('click', handleDivideClick);
     $('#equal-btn').on('click', handleEqualButton);
     $('#clear-btn').on('click', handleClearButton);
@@ -38,13 +38,13 @@ function handleMinusClick() {
     $('#equal-btn').removeClass('divide-btn')
 }
 
-// function handleMultiplyClick() {
-//     console.log('in multiply click');
-//     $('#equal-btn').addClass('multiply-btn');
-//     $('#equal-btn').removeClass('minus-btn');
-//     $('#equal-btn').removeClass('plus-btn');
-//     $('#equal-btn').removeClass('divide-btn')
-// }
+function handleMultiplyClick() {
+    console.log('in multiply click');
+    $('#equal-btn').addClass('multiply-btn');
+    $('#equal-btn').removeClass('minus-btn');
+    $('#equal-btn').removeClass('plus-btn');
+    $('#equal-btn').removeClass('divide-btn')
+}
 
 function submitAddition() {
     const additionObject = {
@@ -82,6 +82,24 @@ function submitSubtraction() {
     })
 }
 
+function submitMultiply() {
+    const MultiplyObject = {
+        firstInputValue: $('#first-input').val(),
+        secondInputValue: $('#second-input').val(),
+    };
+
+    $.ajax({
+        method: 'POST',
+        url: '/Multiply',
+        data: MultiplyObject
+    }).then((response) => {
+        console.log('inside POST request');
+        renderMultiply();
+    }).catch((error) => {
+        console.log('dang, it did not work');
+    })
+}
+
 function renderAddition() {
     $.ajax({
         method: 'GET',
@@ -100,26 +118,41 @@ function renderAddition() {
         })
     }
 
-    function renderSubtraction() {
+    function renderMultiply() {
         $.ajax({
             method: 'GET',
-            url: '/subtractions'
+            url: '/Multiply'
         }).then((response) => {
             console.log('response', response);
-            // $('#calculation-list').empty();
-            // for (let calculation of response) {
                 $('#calculation-list').append(`
-                <li>${response.at(-1).firstInputValue} - ${response.at(-1).secondInputValue} = ${response.at(-1).sum}</li>
+                <li>${response.at(-1).firstInputValue} * ${response.at(-1).secondInputValue} = ${response.at(-1).sum}</li>
                 `)
                 $('#current-total').empty();
                 $('#current-total').append(`
                 ${response.at(-1).sum}
                 `)
-            // }
             }).catch((error) => {
             console.log('error', error);
             })
         }
+
+        function renderSubtraction() {
+            $.ajax({
+                method: 'GET',
+                url: '/subtractions'
+            }).then((response) => {
+                console.log('response', response);
+                    $('#calculation-list').append(`
+                    <li>${response.at(-1).firstInputValue} - ${response.at(-1).secondInputValue} = ${response.at(-1).sum}</li>
+                    `)
+                    $('#current-total').empty();
+                    $('#current-total').append(`
+                    ${response.at(-1).sum}
+                    `)
+                }).catch((error) => {
+                console.log('error', error);
+                })
+            }
 
     // function renderAddition() {
     //     $.ajax({
