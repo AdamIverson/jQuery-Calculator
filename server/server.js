@@ -56,17 +56,25 @@ app.post('/multiply', (req, res) => {
     // res.sendStatus(200);
 });
 
-// app.get('/', (req, res) => {
-//     console.log('in GET /');
-//     res.send();
-// });
+app.get('/divide', (req, res) => {
+    console.log('in GET /divide');
+    res.send(calculations);
+});
 
-// app.post('/', (req, res) => {
-//     console.log('in POST /');
-//     console.log('req.body', req.body);
-//     numberGuesses.push(req.body);
-//     res.sendStatus(201);
-// });
+app.post('/divide', (req, res) => {
+    console.log('in POST /divide');
+    console.log('req.body', req.body);
+    req.body.sum = Number(req.body.firstInputValue) / Number(req.body.secondInputValue);
+    console.log(req.body);
+    calculations.push(req.body);
+    res.send(calculations);
+    // res.sendStatus(200);
+});
+
+app.get('/history', (req, res) => {
+    console.log('in GET /history');
+    res.send(calculations);
+});
 
 app.listen(PORT, () => {
     console.log ('Server is running on port', PORT)

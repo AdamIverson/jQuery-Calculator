@@ -12,14 +12,17 @@
 <body>
     <h1>Server Side Calculator</h1>
     <h2 id="current-total"></h2>
-    <input type="number" placeholder="enner a nummer" id="first-input">
-    <button id="plus-btn" class="plus-btn">+</button>
-    <button id="minus-btn" class="minus-btn">-</button>
-    <button id="multiply-btn" class="multiply-btn">*</button>
-    <button id="divide-btn" class="divide-btn">/</button>
-    <input type="number" placeholder="an anonner nummer" id="second-input">
-    <button id="equal-btn" class="equal-btn">=</button>
-    <button id="clear-btn">c</button>
+    
+    <div class="btn-row">
+        <input type="number" placeholder="enner a nummer" class="input" id="first-input" required>
+        <button id="plus-btn" class="plus-btn operand btn">+</button>
+        <button id="minus-btn" class="minus-btn operand btn">-</button>
+        <button id="multiply-btn" class="multiply-btn operand btn">*</button>
+        <button id="divide-btn" class="divide-btn operand btn">/</button>
+        <input type="number" placeholder="enner anonner nummer" class="input" id="second-input" required>
+        <button id="equal-btn" class="equal-btn btn">=</button>
+        <button id="clear-btn" class="btn">c</button>
+    </div>
 
     <div>
         <ul id="calculation-list"></ul>
