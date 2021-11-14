@@ -29,7 +29,8 @@ input:required {
     width: 25%;
     background-color: #FCDFA6;
     border: 1px black;
-    color: ;
+    color: brown;
+    font-weight: 300;
 }
 
 input:required:invalid {
@@ -38,6 +39,14 @@ input:required:invalid {
 
 ::placeholder {
     color: #A18276;
+}
+
+#first-input {
+    border: 1px solid black;
+}
+
+#second-input {
+    border: 1px solid black;
 }
 
 #current-total {
@@ -58,8 +67,10 @@ input:required:invalid {
     align-content: space-around;
 }
 .calculation-on-dom {
+    font-size: 100px;
     color: #F4B886;
-    text-shadow: 2px 2px 2px #AAC0AA;
+    text-shadow: 2px 2px 2px black;
+    text-align: center;
 }
 
 .btn {

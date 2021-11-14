@@ -3,7 +3,7 @@ $(document).ready(onReady);
 function onReady() {
     console.log('in jQuery');
     clickHandlers();
-    renderers();
+    renderHistory();
 }
 
 function clickHandlers() {
@@ -13,13 +13,6 @@ function clickHandlers() {
     $('.divide-btn').on('click', handleDivideClick);
     $('#equal-btn').on('click', handleEqualButton);
     $('#clear-btn').on('click', handleClearButton);
-}
-
-function renderers() {
-    renderAddition();
-    renderSubtraction();
-    renderMultiply();
-    renderDivide();
 }
 
 function handleEqualButton() {
@@ -72,6 +65,7 @@ function submitAddition() {
     const additionObject = {
         firstInputValue: $('#first-input').val(),
         secondInputValue: $('#second-input').val(),
+        operand: 'plus',
     };
 
     $.ajax({
@@ -90,6 +84,7 @@ function submitSubtraction() {
     const subtractionObject = {
         firstInputValue: $('#first-input').val(),
         secondInputValue: $('#second-input').val(),
+        operand: 'minus',
     };
 
     $.ajax({
@@ -108,6 +103,7 @@ function submitMultiply() {
     const multiplyObject = {
         firstInputValue: $('#first-input').val(),
         secondInputValue: $('#second-input').val(),
+        operand: 'multiply',
     };
 
     $.ajax({
@@ -126,6 +122,7 @@ function submitDivide() {
     const divideObject = {
         firstInputValue: $('#first-input').val(),
         secondInputValue: $('#second-input').val(),
+        operand: 'divide',
     };
 
     $.ajax({
@@ -209,6 +206,33 @@ function renderDivide() {
         `)
     }).catch((error) => {
         console.log('error', error);
+    })
+}
+
+function renderHistory() {
+    $.ajax({
+        method: 'GET',
+        url: '/history'
+    }).then((response) => {
+        console.log('response', response);
+        for (let calculation of response) {
+            if(calculation.operand === 'plus') {
+            $('#calculation-list').append(`
+            <li>${calculation.firstInputValue} + ${calculation.secondInputValue} = ${calculation.sum}
+        `)} else if(calculation.operand === 'minus') {
+                $('#calculation-list').append(`
+                <li>${calculation.firstInputValue} - ${calculation.secondInputValue} = ${calculation.sum}
+        `)} else if(calculation.operand === 'multiply'){
+                $('#calculation-list').append(`
+                <li>${calculation.firstInputValue} * ${calculation.secondInputValue} = ${calculation.sum}
+        `)} else if(calculation.operand === 'divide'){
+                $('#calculation-list').append(`
+                <li>${calculation.firstInputValue} / ${calculation.secondInputValue} = ${calculation.sum}
+        `)} else console.log('too bad hoser');
+        
+    };
+    }).catch((error) => {
+    console.log('error', error);
     })
 }
 
