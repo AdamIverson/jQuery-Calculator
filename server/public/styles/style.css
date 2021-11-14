@@ -1,9 +1,9 @@
 body {
-    background-color: #A18276;
+    background-color: #7a635a;
 }
 
 h1 {
-    color: #F4B886;
+    color: #f48686;
     text-shadow: 2px 2px 2px black;
     text-align: center;
     
@@ -25,7 +25,6 @@ input {
 }
 
 input:required {
-    border: 1px solid red;
     width: 25%;
     background-color: #FCDFA6;
     border: 1px black;
@@ -42,16 +41,28 @@ input:required:invalid {
 }
 
 #first-input {
-    border: 1px solid black;
+    /* border: 1px solid black;
+    box-shadow: 3px 3px 5px #CBE896;
+    inset: ; */
+
+    border-radius: 3px;
+    border: 1px solid transparent;
+    border-top: none;
+    border-bottom: 1px solid #DDD;
+    box-shadow: 3px 3px 5px #CBE896, 0 -1px 1px #FCDFA6, 0 1px 0 #F4B886;
 }
 
 #second-input {
-    border: 1px solid black;
+    border-radius: 3px;
+    border: 1px solid transparent;
+    border-top: none;
+    border-bottom: 1px solid #DDD;
+    box-shadow: 3px 3px 5px #CBE896, 0 -1px 1px #FCDFA6, 0 1px 0 #F4B886;
 }
 
 #current-total {
     font-size: 100px;
-    color: #F4B886;
+    color: #CBE896;
     text-shadow: 2px 2px 2px black;
     text-align: center;
 }
@@ -59,8 +70,10 @@ input:required:invalid {
 #calculation-list {
     font-size: 100px;
     color: #F4B886;
-    text-shadow: 2px 2px 2px black;
+    text-shadow: 2px 2px 2px #f48686;
     text-align: center;
+    opacity: 15%;
+    list-style-type: none;
 }
 
 .btn-row {
@@ -69,7 +82,7 @@ input:required:invalid {
 .calculation-on-dom {
     font-size: 100px;
     color: #F4B886;
-    text-shadow: 2px 2px 2px black;
+    text-shadow: 2px 2px 2px #f48686;
     text-align: center;
 }
 
@@ -79,4 +92,10 @@ input:required:invalid {
     background-color: #AAC0AA;
     border-radius: 50%;
     text-shadow: 1px 1px #A18276;
+}
+
+.btn:active {
+    background-color: #CBE896;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
 }
