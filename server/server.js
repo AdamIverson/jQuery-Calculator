@@ -24,7 +24,8 @@ app.post('/additions', (req, res) => {
     console.log('req.body', req.body);
     req.body.sum = Number(req.body.firstInputValue) + Number(req.body.secondInputValue);    console.log(req.body);
     calculations.push(req.body);
-    res.sendStatus(200);
+    res.send(calculations);
+    // res.sendStatus(200);
 });
 
 app.get('/subtractions', (req, res) => {
@@ -37,7 +38,8 @@ app.post('/subtractions', (req, res) => {
     console.log('req.body', req.body);
     req.body.sum = Number(req.body.firstInputValue) - Number(req.body.secondInputValue);    console.log(req.body);
     calculations.push(req.body);
-    res.sendStatus(200);
+    res.send(calculations);
+    // res.sendStatus(200);
 });
 
 // app.post('/multiplications', (req, res) => {

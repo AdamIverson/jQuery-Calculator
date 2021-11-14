@@ -88,16 +88,13 @@ function renderAddition() {
         url: '/additions'
     }).then((response) => {
         console.log('response', response);
-        $('#calculation-list').empty();
-        for (let calculation of response) {
             $('#calculation-list').append(`
-            <li>${calculation.firstInputValue} + ${calculation.secondInputValue} = ${calculation.sum}</li>
+            <li>${response.at(-1).firstInputValue} + ${response.at(-1).secondInputValue} = ${response.at(-1).sum}</li>
             `)
             $('#current-total').empty();
             $('#current-total').append(`
-            ${calculation.sum}
+            ${response.at(-1).sum}
             `)
-        }
         }).catch((error) => {
         console.log('error', error);
         })
@@ -109,16 +106,16 @@ function renderAddition() {
             url: '/subtractions'
         }).then((response) => {
             console.log('response', response);
-            $('#calculation-list').empty();
-            for (let calculation of response) {
+            // $('#calculation-list').empty();
+            // for (let calculation of response) {
                 $('#calculation-list').append(`
-                <li>${calculation.firstInputValue} - ${calculation.secondInputValue} = ${calculation.sum}</li>
+                <li>${response.at(-1).firstInputValue} - ${response.at(-1).secondInputValue} = ${response.at(-1).sum}</li>
                 `)
                 $('#current-total').empty();
                 $('#current-total').append(`
-                ${calculation.sum}
+                ${response.at(-1).sum}
                 `)
-            }
+            // }
             }).catch((error) => {
             console.log('error', error);
             })
