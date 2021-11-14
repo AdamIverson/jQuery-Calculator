@@ -3,13 +3,11 @@ $(document).ready(onReady);
 function onReady() {
     console.log('in jQuery');
     $('.plus-btn').on('click', handlePlusClick);
-    // $('.minus-btn').on('click', handleMinusClick);
+    $('.minus-btn').on('click', handleMinusClick);
     // $('.multiply-btn').on('click', handleMultiplyClick);
     // $('.divide-btn').on('click', handleDivideClick);
     $('#equal-btn').on('click', handleEqualButton);
     $('#clear-btn').on('click', handleClearButton);
-    // renderCalculation();
-    // renderTotal();
 }
 
 function handleEqualButton() {
@@ -32,13 +30,13 @@ function handlePlusClick() {
     $('#equal-btn').removeClass('divide-btn')
 }
 
-// function handleMinusClick() {
-//     console.log('in minus click');
-//     $('#equal-btn').addClass('minus-btn');
-//     $('#equal-btn').removeClass('plus-btn');
-//     $('#equal-btn').removeClass('multiply-btn');
-//     $('#equal-btn').removeClass('divide-btn')
-// }
+function handleMinusClick() {
+    console.log('in minus click');
+    $('#equal-btn').addClass('minus-btn');
+    $('#equal-btn').removeClass('plus-btn');
+    $('#equal-btn').removeClass('multiply-btn');
+    $('#equal-btn').removeClass('divide-btn')
+}
 
 // function handleMultiplyClick() {
 //     console.log('in multiply click');
@@ -66,25 +64,23 @@ function submitAddition() {
     })
 }
 
-// function submitSubtraction() {
-//     const subtractionObject = {
-//         firstInputValue: $('#first-input').val(),
-//         secondInputValue: $('#second-input').val(),
-//     };
+function submitSubtraction() {
+    const subtractionObject = {
+        firstInputValue: $('#first-input').val(),
+        secondInputValue: $('#second-input').val(),
+    };
 
-//     $.ajax({
-//         method: 'POST',
-//         url: '/subtractions',
-//         data: subtractionObject
-//     }).then((response) => {
-//         console.log('inside POST request');
-//         renderCalculation();
-//     }).catch((error) => {
-//         console.log('dang, it did not work');
-//     })
-// }
-
-// 
+    $.ajax({
+        method: 'POST',
+        url: '/subtractions',
+        data: subtractionObject
+    }).then((response) => {
+        console.log('inside POST request');
+        renderSubtraction();
+    }).catch((error) => {
+        console.log('dang, it did not work');
+    })
+}
 
 function renderAddition() {
     $.ajax({
@@ -106,6 +102,27 @@ function renderAddition() {
         console.log('error', error);
         })
     }
+
+    function renderSubtraction() {
+        $.ajax({
+            method: 'GET',
+            url: '/subtractions'
+        }).then((response) => {
+            console.log('response', response);
+            $('#calculation-list').empty();
+            for (let calculation of response) {
+                $('#calculation-list').append(`
+                <li>${calculation.firstInputValue} - ${calculation.secondInputValue} = ${calculation.sum}</li>
+                `)
+                $('#current-total').empty();
+                $('#current-total').append(`
+                ${calculation.sum}
+                `)
+            }
+            }).catch((error) => {
+            console.log('error', error);
+            })
+        }
 
     // function renderAddition() {
     //     $.ajax({
