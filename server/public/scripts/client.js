@@ -3,12 +3,12 @@ $(document).ready(onReady);
 function onReady() {
     console.log('in jQuery');
     $('.plus-btn').on('click', handlePlusClick);
-    $('.minus-btn').on('click', handleMinusClick);
-    $('.multiply-btn').on('click', handleMultiplyClick);
+    // $('.minus-btn').on('click', handleMinusClick);
+    // $('.multiply-btn').on('click', handleMultiplyClick);
     // $('.divide-btn').on('click', handleDivideClick);
     $('#equal-btn').on('click', handleEqualButton);
     $('#clear-btn').on('click', handleClearButton);
-    renderCalculation();
+    // renderCalculation();
     // renderTotal();
 }
 
@@ -32,21 +32,21 @@ function handlePlusClick() {
     $('#equal-btn').removeClass('divide-btn')
 }
 
-function handleMinusClick() {
-    console.log('in minus click');
-    $('#equal-btn').addClass('minus-btn');
-    $('#equal-btn').removeClass('plus-btn');
-    $('#equal-btn').removeClass('multiply-btn');
-    $('#equal-btn').removeClass('divide-btn')
-}
+// function handleMinusClick() {
+//     console.log('in minus click');
+//     $('#equal-btn').addClass('minus-btn');
+//     $('#equal-btn').removeClass('plus-btn');
+//     $('#equal-btn').removeClass('multiply-btn');
+//     $('#equal-btn').removeClass('divide-btn')
+// }
 
-function handleMultiplyClick() {
-    console.log('in multiply click');
-    $('#equal-btn').addClass('multiply-btn');
-    $('#equal-btn').removeClass('minus-btn');
-    $('#equal-btn').removeClass('plus-btn');
-    $('#equal-btn').removeClass('divide-btn')
-}
+// function handleMultiplyClick() {
+//     console.log('in multiply click');
+//     $('#equal-btn').addClass('multiply-btn');
+//     $('#equal-btn').removeClass('minus-btn');
+//     $('#equal-btn').removeClass('plus-btn');
+//     $('#equal-btn').removeClass('divide-btn')
+// }
 
 function submitAddition() {
     const additionObject = {
@@ -60,51 +60,36 @@ function submitAddition() {
         data: additionObject
     }).then((response) => {
         console.log('inside POST request');
-        renderCalculation();
+        renderAddition();
     }).catch((error) => {
         console.log('dang, it did not work');
     })
 }
 
-function submitSubtraction() {
-    const subtractionObject = {
-        firstInputValue: $('#first-input').val(),
-        secondInputValue: $('#second-input').val(),
-    };
+// function submitSubtraction() {
+//     const subtractionObject = {
+//         firstInputValue: $('#first-input').val(),
+//         secondInputValue: $('#second-input').val(),
+//     };
 
-    $.ajax({
-        method: 'POST',
-        url: '/subtractions',
-        data: subtractionObject
-    }).then((response) => {
-        console.log('inside POST request');
-        renderCalculation();
-    }).catch((error) => {
-        console.log('dang, it did not work');
-    })
-}
+//     $.ajax({
+//         method: 'POST',
+//         url: '/subtractions',
+//         data: subtractionObject
+//     }).then((response) => {
+//         console.log('inside POST request');
+//         renderCalculation();
+//     }).catch((error) => {
+//         console.log('dang, it did not work');
+//     })
+// }
 
-function submitMultiply() {
-    const multiplicationObject = {
-        firstInputValue: $('#first-input').val(),
-        secondInputValue: $('#second-input').val(),
-    };
+// 
 
-    $.ajax({
-        method: 'POST',
-        url: '/multiplications',
-        data: multiplicationObject
-    }).then((response) => {
-        console.log('inside POST request');
-        renderCalculation();
-    }).catch((error) => {
-        console.log('dang, it did not work');
-    })
-}
-function renderCalculation() {
+function renderAddition() {
     $.ajax({
         method: 'GET',
-        url: '/calculations'
+        url: '/additions'
     }).then((response) => {
         console.log('response', response);
         $('#calculation-list').empty();
@@ -122,11 +107,27 @@ function renderCalculation() {
         })
     }
 
-function handleClearButton() {
-    console.log('in the clear');
-    $('#first-input').val('')
-    $('#second-input').val('')
-}
+    // function renderAddition() {
+    //     $.ajax({
+    //         method: 'GET',
+    //         url: '/subtracttions'
+    //     }).then((response) => {
+    //         console.log('response', response);
+    //         $('#calculation-list').empty();
+    //         for (let calculation of response) {
+    //             $('#calculation-list').append(`
+    //             <li>${calculation.firstInputValue} - ${calculation.secondInputValue} = ${calculation.sum}</li>
+    //             `)
+    //             $('#current-total').empty();
+    //             $('#current-total').append(`
+    //             ${calculation.sum}
+    //             `)
+    //         }
+    //         }).catch((error) => {
+    //         console.log('error', error);
+    //         })
+    //     }
+
 // function renderCalculation() {
 //     $.ajax({
 //       method: 'GET',
@@ -144,3 +145,8 @@ function handleClearButton() {
 //     });
 //   }
 
+function handleClearButton() {
+    console.log('in the clear');
+    $('#first-input').val('')
+    $('#second-input').val('')
+}

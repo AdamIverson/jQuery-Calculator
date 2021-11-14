@@ -14,7 +14,7 @@ app.get('/total', (req, res) => {
         res.send(calculations.sum);
     });
 
-app.get('/calculations', (req, res) => {
+app.get('/additions', (req, res) => {
     console.log('in GET /calculations');
     res.send(calculations);
 });
@@ -35,13 +35,13 @@ app.post('/subtractions', (req, res) => {
     res.sendStatus(200);
 });
 
-app.post('/multiplications', (req, res) => {
-    console.log('in POST /multiplications');
-    console.log('req.body', req.body);
-    req.body.sum = Number(req.body.firstInputValue) * Number(req.body.secondInputValue);    console.log(req.body);
-    calculations.push(req.body);
-    res.sendStatus(200);
-});
+// app.post('/multiplications', (req, res) => {
+//     console.log('in POST /multiplications');
+//     console.log('req.body', req.body);
+//     req.body.sum = Number(req.body.firstInputValue) * Number(req.body.secondInputValue);    console.log(req.body);
+//     calculations.push(req.body);
+//     res.sendStatus(200);
+// });
 // app.get('/', (req, res) => {
 //     console.log('in GET /');
 //     res.send();
